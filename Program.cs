@@ -9,12 +9,15 @@ namespace ApiHelper
         {
             API.InitializeClient();
 
-            ApiLoader client = new ApiLoader();
+            JsonClient client = new JsonClient();
+
+            
 
             Console.WriteLine("Loading...");
 
             Fruit x = await client.GetDataAsync<Fruit>("banana");
 
+            Console.Clear();
             Console.WriteLine(x.name);
 
 

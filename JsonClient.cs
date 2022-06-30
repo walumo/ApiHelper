@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiHelper
 {
-    public class ApiLoader
+    public class JsonClient
     {
         const string baseUrl = "https://fruityvice.com/api/fruit/"; //Set to your endpoint url
         public async Task<T> GetDataAsync<T>(string urlParams) //urlParams are your query parameters
@@ -16,13 +16,12 @@ namespace ApiHelper
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    var msg = await response.Content.ReadAsStringAsync();
+                    string msg = await response.Content.ReadAsStringAsync();
                     return JsonSerializer.Deserialize<T>(msg);
                 }
                 else
                 {
-                    Console.WriteLine("Something went wrong: (status: {0})", response.StatusCode);
-                    return default(T);
+                    throw new Exception(response.ReasonPhrase);
                 }
             }
         }
