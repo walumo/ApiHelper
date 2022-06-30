@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ApiHelper
@@ -11,15 +12,34 @@ namespace ApiHelper
 
             JsonClient client = new JsonClient();
 
-            
-
             Console.WriteLine("Loading...");
 
-            Fruit x = await client.GetDataAsync<Fruit>("banana");
+            List<Fruit> fruitList = await client.GetAllDataAsync<Fruit>("all"); //get all from fruityvice API
 
-            Console.Clear();
-            Console.WriteLine(x.name);
+            Fruit oneFruit = await client.GetDataAsync<Fruit>("banana"); //query single fruit by name
 
+            try
+            {
+                foreach (Fruit fruit in fruitList)
+                {
+                    Console.WriteLine(fruit.name);
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
+
+            try
+            {
+                Console.WriteLine("\nName of the single fruit: {0}", oneFruit.name);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
         }
     }
