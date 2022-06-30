@@ -1,7 +1,6 @@
 # ApiHelper
 
-Initialize the HttpClient and JsonClient
-Use GetDataAsync() to query your API.
+Initialize the HttpClient and JsonClient, then use GetDataAsync() to query your API.
 
 ```
 using System;
